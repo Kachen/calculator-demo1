@@ -20,6 +20,10 @@ export class CalculateService {
       this.display = '';
       this.calculating = false;
     }
+    if (this.equaled) {
+      this.display = '';
+      this.equaled = false;
+    }
     if (this.display === '0' && num !== '.') {
       this.display = '';
     }
@@ -31,7 +35,13 @@ export class CalculateService {
     }
     switch (sym) {
       case 'ac':
-        this.ac();
+        this.calculating = false;
+        this.equaled = false;
+        this.result = undefined;
+        this.input = 0;
+        this.display = '0';
+        this.statement = '';
+        this.operator = undefined;
         break;
       case '+/-':
         this.result = this.input * -1;
@@ -71,13 +81,5 @@ export class CalculateService {
     }
     this.display = this.result.toString();
     this.statement = this.result + this.operator;
-  }
-  ac() {
-    this.calculating = false;
-    this.result = undefined;
-    this.input = 0;
-    this.display = '0';
-    this.statement = '';
-    this.operator = undefined;
   }
 }
